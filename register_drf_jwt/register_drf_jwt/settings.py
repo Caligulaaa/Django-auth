@@ -9,14 +9,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e*f6w5wmm&7*z2xe@(i8y^j5ht#2e-*1kiuc5w%^@ki)nx_bu_'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'drf.User'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp-relay.sendinblue.com'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER') #  логин
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD') #  пароль
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+print(EMAIL_HOST_USER,EMAIL_HOST_PASSWORD)
 # Application definition
 
 INSTALLED_APPS = [
